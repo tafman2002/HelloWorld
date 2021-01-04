@@ -1,0 +1,44 @@
+import random
+
+# Returns a computerized random number
+def getRandomNumber():
+    return random.randint(0, 100)
+
+# Returns clues for the user to guess the answer
+def getClues(input, actual):
+    if (input > actual):
+        print("Your input is too high")
+    else:
+        print("Your input is too low")
+
+    if (actual % 2 == 0):
+        print("The actual number is divisible by 2")
+    else:
+        print("The actual number is not divisible by 2")
+
+    print(str(random.randint(0,5) * actual) + " is a multiple of the answer")
+
+# Starts the guessing game
+def startGame():
+    print("Welcome to the Guessing Game! Guess the correct number before your score decreases")
+    Score = 100
+    gotAnswer = False
+    Actual = getRandomNumber()
+    while (Score > 0):
+        Answer = int(input("Guess the correct number between 0 and 100: "))
+        if (Answer != Actual):
+            Score -= 10
+            print("/ Your Score is now " + str(Score) + " /")
+            getClues(Answer, Actual)
+            print("____________________________")
+        else:
+            gotAnswer = True
+            break
+    if (gotAnswer == True):
+        print("You got it right!!! Your final score is " + str(Score))
+    else:
+        print("Oops! You are out of points. The real answer was " + str(Actual))
+        print("Try again next time")
+
+# Calling the startGame
+startGame()
